@@ -40,6 +40,14 @@ pipeline {
             }
         }
 
+        stage('Inject Image Tag into Deployment YAML') {
+            steps {
+                sh """
+                sed -i 's|IMAGE_PLACEHOLDER|${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}|g' k8s/deployment.yaml
+                """
+            }
+        }
+
         stage('Deploy to Kubernetes via Ansible') {
             steps {
                 sh """
