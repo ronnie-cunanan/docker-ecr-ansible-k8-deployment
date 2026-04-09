@@ -18,6 +18,6 @@ spec:
       - name: ecr-secret
       containers:
       - name: k8-flask-app
-        image: 962047682202.dkr.ecr.ap-southeast-2.amazonaws.com/my-docker-repo:latest
+        image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 5001
