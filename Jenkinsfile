@@ -39,11 +39,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Kubernetes via Ansible') {
+            steps {
+                sh """
+                docker run --rm \
+                  -v \$PWD:/workspace \
+                  -v /var/jenkins_home/.ssh:/root/.ssh \
+                  -w /workspace \
+                  willhallonline/ansible:latest \
+                  ansible-playbook -i /ansible/inventory /ansible/deploy.yml \
+                    --ssh-extra-args='-o StrictHostKeyChecking=no'
+                """
+            }
+        }    
     }
 
     post {
         success {
-            echo "Deployment successful: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
+            echo "K8 Deployment successful: ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
         }
         failure {
             echo "Build or deployment failed. Check stage logs."
