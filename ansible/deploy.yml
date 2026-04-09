@@ -6,7 +6,7 @@
   tasks:
     - name: Copy Kubernetes manifests
       copy:
-        src: ../k8s/
+        src: /workspace/k8s/
         dest: /home/ubuntu/k8s/
         owner: ubuntu
         group: ubuntu
