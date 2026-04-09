@@ -46,7 +46,7 @@ pipeline {
                 docker run --rm \
                   -v \$PWD:/workspace \
                   -v /var/jenkins_home/.ssh:/root/.ssh \
-                  -w /workspace \
+                  -v $WORKSPACE/ansible:/ansible \
                   willhallonline/ansible:latest \
                   ansible-playbook -i /ansible/inventory /ansible/deploy.yml \
                     --ssh-extra-args='-o StrictHostKeyChecking=no'
