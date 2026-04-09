@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8-flask-app
+  labels:
+    app: k8-flask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8-flask-app
+  template:
+    metadata:
+      labels:
+        app: k8-flask-app
+    spec:
+      containers:
+      - name: k8-flask-app
+        image: 962047682202.dkr.ecr.ap-southeast-2.amazonaws.com/k8-flask-app:latest
+        ports:
+        - containerPort: 5001

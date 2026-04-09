@@ -1,0 +1,19 @@
+---
+- name: Deploy Flask App to Kubernetes
+  hosts: k8s_control_plane
+  become: yes
+
+  tasks:
+    - name: Copy Kubernetes manifests
+      copy:
+        src: ../k8s/
+        dest: /home/ubuntu/k8s/
+        owner: ubuntu
+        group: ubuntu
+        mode: 0644
+
+    - name: Apply Kubernetes Deployment
+      command: kubectl apply -f /home/ubuntu/k8s/deployment.yaml
+
+    - name: Apply Kubernetes Service
+      command: kubectl apply -f /home/ubuntu/k8s/service.yaml
