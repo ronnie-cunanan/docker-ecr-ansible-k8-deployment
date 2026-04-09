@@ -2,7 +2,9 @@
 - name: Deploy Flask App to Kubernetes
   hosts: k8s_control_plane
   become: yes
-
+  environment:
+    KUBECONFIG: /home/ubuntu/.kube/config
+    
   tasks:
     - name: Copy Kubernetes manifests
       copy:
