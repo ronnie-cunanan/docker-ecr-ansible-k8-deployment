@@ -14,8 +14,10 @@ spec:
       labels:
         app: k8-flask-app
     spec:
+      imagePullSecrets:
+      - name: ecr-secret
       containers:
       - name: k8-flask-app
-        image: 962047682202.dkr.ecr.ap-southeast-2.amazonaws.com/k8-flask-app:latest
+        image: 962047682202.dkr.ecr.ap-southeast-2.amazonaws.com/my-docker-repo:latest
         ports:
         - containerPort: 5001
